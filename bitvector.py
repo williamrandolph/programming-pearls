@@ -9,7 +9,7 @@ at most once and no other data is assocated with the element." The BitVector
 class in this module is an implementation of a bitmap data structure that uses
 Python's bytearray class. The bytearray class, in turn, is "a mutable sequence
 of integers in the range 0 <= x < 256." A byte-sized integer is represented in
-8 bits. We can show this using Python's format string specifications:
+8 bits. We can show this using this module's conversion function:
 
 >>> int_to_binary_string(249)
 '11111001'
@@ -221,7 +221,7 @@ class BitVector:
 
         But how do we generate the '01111111' that we need? You might want to
         use the '~' bit flip operator, but Python integers use more than a
-        byte and this won't give us the number we need. Instead, we can use
+        byte and this won't give us the number we're after. Instead, we can use
         the XOR ('exclusive or') operator, which is true when one bit is true
         but not when both bits are true.
 
