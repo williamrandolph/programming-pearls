@@ -13,15 +13,25 @@ zero to fifteen.
 We have to initialize with length, and from there we've hijacked the Python
 interface for lists.
 
-# example of usage
+>>> nv = NibbleVector(10)
+>>> nv[3], nv[6], nv[9] = 1, 2, 3
+>>> nv[3]
+1
+>>> nv[6]
+2
 
 I've also put in the iterator.
 
-# example of usage.
+>>> the_sum = 0
+>>> for val in nv:
+...     the_sum += val
+>>> the_sum
+6
 
 We can return a normal Python list too:
 
-# example of usage
+>>> list(nv)
+[0, 0, 0, 1, 0, 0, 2, 0, 0, 3]
 """
 
 class NibbleVector:
@@ -134,14 +144,25 @@ class NibbleVector:
         >>> for r in nv: print r   # doctest: +NORMALIZE_WHITESPACE
         1 2 3 4 5
         """
+        return NibbleVector_iter(self)
+
+
+class NibbleVector_iter:
+    """Iterator for the NibbleVector class"""
+    def __init__(self, nv):
+        self.index = 0
+        self.nv = nv
+        # self.n = len(nv)
+
+    def __iter__(self):
         return self
 
     def next(self):
-        if self.index == self.size:
+        if self.index == len(self.nv):
             raise StopIteration
-        value = self.__getitem__(self.index)
+        # value = self.__getitem__(self.index)
         self.index = self.index + 1
-        return value
+        return self.nv[self.index - 1]
 
 if __name__ == "__main__":
     import doctest
