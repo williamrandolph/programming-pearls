@@ -62,6 +62,7 @@ def int_to_binary_string(n):
     
     if n < 0 or n > 255:
         raise ValueError('n must be between 0 and 255 inclusive')
+    # we could use bin(n) but leading zeroes are helpful here!
     return "{:0>8b}".format(n)
 
 def binary_string_to_int(b):
